@@ -36,11 +36,11 @@
         <span class="product-stars"><?php echo $data['score-stars']; ?></span>
         <div class="product-facebook fb-share-button" data-href="<?php echo get_the_permalink(); ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink(); ?>&src=sdkpreparse"><?php _e('Compartir'); ?></a></div>
         <div class="product-data">
-          <div><label><?php _e('Nombre:'); ?></label><span><?php echo $data['product-name']; ?></span></div>
-          <div><label><?php _e('Marca:'); ?></label><span><?php echo $data['brand']; ?></span></div>
+          <div><label><?php _e('Nombre:'); ?></label><span><?php  _e($data['product-name']); ?></span></div>
+          <div><label><?php _e('Marca:'); ?></label><span><?php _e($data['brand']); ?></span></div>
           <?php if (get_post_type() == 'main_product') : ?><div><label><?php _e('Tipo:'); ?></label><span><?php echo $data['type']; ?></span></div><?php endif; ?>
-          <div><label><?php _e('Operación:'); ?></label><span><?php echo $data['transaction']; ?></span></div>
-          <div><label><?php _e('Capacidad:'); ?></label><span><?php echo $data['capacitance']; ?></span></div>
+          <div><label><?php _e('Operación:'); ?></label><span><?php _e($data['transaction']); ?></span></div>
+          <div><label><?php _e('Capacidad:'); ?></label><span><?php _e($data['capacitance']); ?></span></div>
         </div>
         <a rel="nofollow" class="aawp-button aawp-button--buy aawp-button aawp-button--amazon aawp-button--icon aawp-button--icon-amazon-black product-button-2" href="<?php echo $data['affiliate-link']; ?>"><?php echo $data['button-text']; ?></a>
         <i class="icon-amazon"></i>
