@@ -1,0 +1,65 @@
+/* --------------------------------------------------
+custom pages elements
+----------------------------------------------------- */
+
+// --- page cafeteras-nespresso
+#box-content__07-olds-cofee {
+  &::before {
+    background: transparent url('assets/images/bg__antiguas.jpg') center top no-repeat;
+    background-size: cover;
+  }
+}
+
+#box-content__14-small-coffee {
+  &::before {
+    background: transparent url('assets/images/bg__pequenas.jpg') center top no-repeat;
+    background-size: cover;
+  }
+
+  figure {
+    text-align: right;
+
+    img {
+      width: 80%;
+    }
+  }
+}
+
+
+// --- page cafeteras-capsulas
+
+
+
+// --- page cafeteras-tipos
+#box-content__universal-capsules {
+  &::before {
+    background: transparent url('assets/images/bg__universal-capsules.jpg') center top no-repeat;
+    background-size: cover;
+  }
+}
+
+#box-content__toy-capsules {
+  &::before {
+    background: transparent url('assets/images/bg__toy-capsules.jpg') center top no-repeat;
+    background-size: cover;
+  }
+}
+
+#box-content__2021-capsules {
+  &::before {
+    background: transparent url('assets/images/bg__2021-capsules.jpg') center top no-repeat;
+    background-size: cover;
+  }
+}
+
+#box-content__materials {
+  &::before {
+    background: transparent url('assets/images/bg__materials.jpg') center top no-repeat;
+    background-size: cover;
+  }
+}
+
+
+/*
+-- media queries
+*/

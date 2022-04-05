@@ -1,0 +1,124 @@
+/* --------------------------------------------------
+mixins
+----------------------------------------------------- */
+
+@mixin transition-effect($prop,$secs,$timing) {
+  transition: $prop $secs $timing;
+  -webkit-transition: $prop $secs $timing;
+  -moz-transition: $prop $secs $timing;
+  -ms-transition: $prop $secs $timing;
+  -o-transition: $prop $secs $timing;
+}
+
+@mixin transform($filter-type,$filter-amount) {
+  -webkit-transform: $filter-type+unquote('(#{$filter-amount})');
+  -moz-transform: $filter-type+unquote('(#{$filter-amount})');
+  -ms-transform: $filter-type+unquote('(#{$filter-amount})');
+  -o-transform: $filter-type+unquote('(#{$filter-amount})');
+  transform: $filter-type+unquote('(#{$filter-amount})');
+}
+
+@mixin transforms($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  -o-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin filter($filter-type,$filter-amount) {
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  -o-filter: $filter-type+unquote('(#{$filter-amount})');
+  filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+
+  filter: alpha(opacity=$opacity-ie); // IE8
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+@mixin border-radius-full($r1,$r2,$r3,$r4) {
+  border-radius: $r1 $r2 $r3 $r4;
+  -moz-border-radius: $r1 $r2 $r3 $r4;
+  -webkit-border-radius: $r1 $r2 $r3 $r4;
+  -o-border-radius: $r1 $r2 $r3 $r4;
+  -ms-border-radius: $r1 $r2 $r3 $r4;
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin vertical-gradient($top, $bottom) {
+  background: $top;
+  background: -moz-linear-gradient(bottom, $top 0%, $bottom 50%);
+  background: -webkit-linear-gradient(bottom, $top 0%, $bottom 50%);
+  background: -o-linear-gradient(bottom, $top 0%, $bottom 50%);
+  background: -ms-linear-gradient(bottom, $top 0%, $bottom 50%);
+  background: linear-gradient(to bottom, $top 0%, $bottom 50%);
+}
+
+@mixin vertical-gradient-full($to,$colo1,$color2) {
+  background: $colo1;
+  background: -moz-linear-gradient($to, $colo1 0%, $color2 90%);
+  background: -webkit-linear-gradient($to, $colo1 0%, $color2 90%);
+  background: -o-linear-gradient($to, $colo1 0%, $color2 90%);
+  background: -ms-linear-gradient($to, $colo1 0%, $color2 90%);
+  background: linear-gradient(to $to, $colo1 0%, $color2 90%);
+}
+
+@mixin flex-box($align, $justify ) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color; /* The Fallback */
+  background: rgba($color, $opacity);
+}
+
+@mixin form-placeholder {
+  @include optional-at-root("::-webkit-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root("::-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":-ms-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root("::-ms-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root("::placeholder") {
+    @content;
+  }
+}

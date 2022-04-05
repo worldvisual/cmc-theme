@@ -1,0 +1,101 @@
+/* --------------------------------------------------
+rmp-widgets-container stykes
+----------------------------------------------------- */
+.rmp-widgets-container {
+  &.rmp-wp-plugin {
+    &.rmp-main-container {
+      margin: 4rem 0;
+
+      .rmp-rating-widget {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+
+        .rmp-icon--star {
+          -webkit-text-fill-color: $c--white;
+          -webkit-text-stroke: 2px $c--secondary;
+        }
+
+        .rmp-icon--full-highlight {
+          -webkit-text-fill-color: $c--secondary;
+        }
+
+        .rmp-icon--half-highlight {
+         //  background: linear-gradient(to right,#FFCA00 50%,#fff 50%);
+          background: linear-gradient(to right,$c--secondary 50%,$c--white 50%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .rmp-icon--ratings {
+          font-size: 2.25rem;
+        }
+
+        .rmp-heading--subtitle {
+          font-size: $fs--xx-big;
+          font-weight: $fw--bold;
+          padding: 0;
+          margin: 0;
+          line-height: $fs--xx-big;
+          color: $c--primary;
+          font-family: $ff--title;
+          order: 1;
+          margin: 1rem 0;
+        }
+        .rmp-rating-widget__icons {
+          order: 0;
+
+          .rmp-rating-widget__icons-list {
+            li {
+              margin-right: 1rem;
+
+              i {
+                color: $c--secondary;
+              }
+
+              .rmp-icon--full-highlight {
+                color: $c--secondary;
+              }
+
+              .rmp-icon--half-highlight {
+                color: $c--secondary;
+              }
+            }
+          }
+        }
+        p {
+          font-size: $fs--x-medium;
+          font-weight: $fw--bold;
+          padding: 0;
+          margin: 0;
+          color: $c--primary;
+          order: 2;
+        }
+      }
+    }
+  }
+}
+
+/*
+-- media queries
+*/
+@media only screen and (max-width:768px) {
+  .rmp-widgets-container {
+    &.rmp-wp-plugin {
+      &.rmp-main-container {
+        .rmp-rating-widget {
+          .rmp-icon--ratings {
+            font-size: $fs--big;
+          }
+          .rmp-heading--subtitle {
+            font-size: $fs--big;
+            line-height: $fs--x-big;
+          }
+          p {
+            font-size: $fs--medium;
+          }
+        }
+      }
+    }
+  }
+}

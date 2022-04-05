@@ -1,0 +1,54 @@
+/* --------------------------------------------------
+fonts
+----------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&family=Poppins:wght@400;500;600&&display=swap');
+
+/* --------------------------------------------------
+utils
+----------------------------------------------------- */
+@import "_utils/mixins";
+
+/* --------------------------------------------------
+base
+----------------------------------------------------- */
+@import "_bases/variables";
+@import "_bases/reset";
+@import "_bases/base";
+@import "_bases/typography";
+
+/* --------------------------------------------------
+utils
+----------------------------------------------------- */
+@import "_utils/utils";
+@import "_utils/wp-custom";
+
+/* --------------------------------------------------
+components
+----------------------------------------------------- */
+@import "_components/header";
+@import "_components/menu";
+@import "_components/footer";
+@import "_components/pagination";
+@import "_components/widgets";
+
+/* --------------------------------------------------
+pages
+----------------------------------------------------- */
+@import "_pages/home";
+@import "_pages/cafeteras";
+@import "_pages/products";
+@import "_pages/search";
+@import "_pages/error404";
+@import "_pages/institucional";
+
+/* --------------------------------------------------
+overrides plugins
+----------------------------------------------------- */
+@import "_plugins/amazon-plugin";
+@import "_plugins/comments";
+@import "_plugins/pt-cv-wrapper";
+@import "_plugins/schema-how-to-steps";
+@import "_plugins/toc_container";
+@import "_plugins/foo-gallery";
+@import "_plugins/rmp-widgets-container";
+@import "_plugins/product-gallery";

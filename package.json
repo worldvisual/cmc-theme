@@ -1,0 +1,48 @@
+{
+  "name": "cmc-theme",
+  "version": "1.0.0",
+  "description": "Base theme for ComprarMiCafetera.com",
+  "author": "Mauricio Silva",
+  "scripts": {
+    "start": "npm run build:local",
+    "build": "webpack --config ./config/webpack/webpack.production.config.js --env.NODE_ENV=production --profile --colors",
+    "build:dev": "webpack --config ./config/webpack/webpack.config.js --env.NODE_ENV=development --env.RIBBON_ENV=development --profile --colors",
+    "build:local": "webpack-dev-server --config ./config/webpack/webpack.config.js --env.NODE_ENV=development --env.RIBBON_ENV=development --profile --colors --watch",
+    "changelog": "cross-env auto-changelog && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
+    "extract:messages": "cross-env react-intl-cra 'modules/cmc-theme/src/**/**/*.js' -o 'modules/cmc-theme/src/i18n/json/messages.json'",
+    "extract:pot": "cross-env react-intl-po json2pot 'modules/cmc-theme/src/i18n/json/messages.json' -o 'modules/cmc-theme/src/i18n/pot/messages.pot' && grunt pot",
+    "extract:po": "npm run extract:po:react && npm run extract:po:wp",
+    "extract:po:react": "cross-env react-intl-po po2json 'modules/cmc-theme/src/i18n/po/*.po' -m 'modules/cmc-theme/src/i18n/json/messages.json' -o 'modules/cmc-theme/src/i18n/json/react/translations.json'",
+    "extract:po:wp": "cross-env react-intl-po po2json 'lang/*.po' -m 'modules/cmc-theme/src/i18n/json/messages.json' -o 'modules/cmc-theme/src/i18n/json/wordpress/translations.json'",
+    "extract:merge": "./config/scripts/merge-pot2po.sh",
+    "extract:po2mo": "./config/scripts/po2mo.sh",
+    "lint": "eslint ./assets --ext .js",
+    "lint:fix": "eslint ./assets --ext .js --fix",
+    "dev": "npm run development",
+    "prod": "npm run production",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
+  },
+  "dependencies": {
+    "cmc-layout": "git+ssh://git@git.mcontigo.com:layouts/cmc-layout#1.1.0",
+    "prop-types": "^15.6.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.1",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "figlet": "^1.2.3",
+    "laravel-mix": "^6.0.39",
+    "prettier": "2.5.1",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0"
+  }
+}

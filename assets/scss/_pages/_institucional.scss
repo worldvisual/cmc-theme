@@ -1,0 +1,533 @@
+/* --------------------------------------------------
+institucional custom pages like About Us, Contact
+----------------------------------------------------- */
+.page_sobre-nosotros {
+  background: $c--white url('assets/images/bg__ring--top--right.png') center top no-repeat;
+
+  .entry-header {
+    padding: 1rem 0;
+
+    h1 {
+      display: none;
+    }
+  }
+
+  #toc_container {
+    display: none;
+  }
+
+  .container-bg-color {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    .wp-block-columns {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+
+      .wp-block-column {
+        background-color: $c--white;
+        border-bottom: 0.25rem solid $c--primary;
+        padding: 1rem;
+        margin-bottom: 1rem;
+  
+        @include box-shadow(0 0 16px 8px rgba(0, 0, 0, 0.05));
+  
+        figure {
+          /*
+          text-align: left !important;
+          margin-left: 0 !important;
+          
+          &.wp-block-image {
+            margin: 0;
+          }
+          */
+  
+          img {
+            width: auto;
+            height: 78px;
+            box-shadow: none !important;
+          }
+        }
+  
+        p {
+          font-size: $fs--small;
+        }
+      }
+    }    
+  }
+
+  /*
+	-- media queries
+	*/
+	@media screen and (max-width: 768px) {
+    .entry-header {
+      padding: 0.45rem 0;
+    }
+
+    .wp-block-column h1 {
+      padding: 0;
+    }
+    
+    .container-bg-color {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+}
+
+
+.page_contacto {
+  background: $c--white url('assets/images/bg__ring--top--right.png') center top no-repeat;
+
+  .entry-header {
+    padding: 1rem 0;
+
+    h1 {
+      display: none;
+    }
+  }
+
+  .wp-block-column h1 {
+    padding: 0;
+  }
+
+  .list__contact {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      font-size: $fs--x-normal;
+      color: $c--gray-light;
+      line-height: 1.75rem;
+      padding: 1rem 0 1rem 5rem;
+      position: relative;
+
+      strong {
+        color: $c--text;
+        font-size: $fs--medium;
+        font-weight: $fw--bold;
+        display: block;
+        line-height: 1.5rem;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top:1rem;
+        left: 0;
+        background-color: $c--gray-lighter;
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 68px;
+        width: 68px;
+        background-size: 64%;
+
+        @include border-radius(50%);
+      }
+
+      &:nth-child(1)::before {
+        background-image: url('assets/images/icon__phone.png');
+      }
+      &:nth-child(2)::before {
+        background-image: url('assets/images/icon__email.png');
+      }
+      &:nth-child(3)::before {
+        background-image: url('assets/images/icon__local.png');
+      }
+    }    
+  }
+  .group__social {
+    padding: 0.5rem 0 1rem 0;
+
+    p {
+      color: $c--text;
+      font-size: $fs--x-medium;
+      font-weight: $fw--bold;
+      display: inline-block;
+      line-height: 1.5rem;
+    }
+
+    ul {
+      display: inline-block;
+      li {
+        display: inline-block;
+        background-color: $c--secondary;
+        padding: 1rem;
+        margin-right: 0.5rem;
+
+        @include transition-effect(all, 0.3s, ease);
+        @include border-radius(50%);
+
+        a {
+          display: flex;
+          color: transparent;
+          width: 24px;
+          height: 24px;
+          align-items: center;
+          justify-content: center;
+
+          i {            
+            color: $c--primary;
+            font-size: 24px;         
+          }
+
+          span {
+            display: none;
+            text-indent: -5000px;
+            overflow: hidden;
+          }
+        }
+
+        &:hover {
+          @include opacity(0.75);
+        }
+      }
+    }    
+  }
+
+  .group__form {
+    background-color: $c--white;
+    padding: 1.75rem 2rem;
+    border-bottom: 0.25rem solid $c--primary;
+
+    @include box-shadow(0 0 16px 8px rgba(0, 0, 0, 0.05));
+
+    h2 {
+      padding: 0;
+      font-size: $fs--x-big;
+      margin-top: 0 !important;
+    }
+
+    // styles for WP Forms
+    .wpforms-confirmation-scroll  {      
+      margin-top: 1rem;
+
+      @include border-radius(4px);         
+      @include background-opacity($c--success, 0.60);  
+
+      p {
+        font-family: $ff--text;  
+        font-size: $fs--small;
+        color: $c--white;
+        text-align: center;
+        line-height: 1rem;
+      }
+
+      a {
+        text-decoration: underline;
+        color: $c--white;
+      }
+    }
+
+    .wpforms-error-container  {   
+      font-family: $ff--text;  
+      font-size: $fs--small;
+      color: $c--white;
+      text-align: center;
+      padding: 1rem;   
+      margin-top: 1rem;
+
+      @include border-radius(4px);         
+      @include background-opacity($c--danger, 0.55);  
+
+      p {
+        font-family: $ff--text;  
+        font-size: $fs--small;
+        color: $c--white;
+        text-align: center;
+        line-height: 1rem;
+      }
+
+      a {
+        text-decoration: underline;
+        color: $c--white;
+      }
+    }
+
+    form.wpforms-form {
+      padding: 0 2rem;      
+
+      .wpforms-field {
+        position: relative;
+        margin: 0.25rem 0;
+
+        label {    
+          font-size: $fs--x-normal;
+          color: $c--gray-light;
+          padding: 0.5rem;
+          display: inline-block;
+          position: absolute;
+          font-weight: $fw--light;
+          top: 0.75rem;
+          z-index: 2;
+
+          span {
+            color: $c--secondary;
+          }
+        
+          @include transition-effect(all, 0.3s, ease);       
+        }
+
+        &:focus-within {
+          label {
+            font-size: $fs--small;
+            top: -1rem;
+          }
+          label.wpforms-error {
+            top: 0;
+            font-size: $fs--x-small;
+          }
+        }
+
+        label.wpforms-error {
+          position: relative;
+          top: 0;
+          font-size: $fs--x-small;
+          color: $c--danger;
+          padding: 0.25rem 0.5rem;
+        }
+
+        input,
+        textarea {
+          border: none;
+          border-bottom: 1px solid $c--gray;
+          width: 100%;
+          max-width: 100%;
+          font-size: $fs--x-normal;
+          color: $c--gray;
+          padding: 0 0.5rem 0.5rem 0.5rem;
+          outline: none;
+          z-index: 1;
+          background-color: $c--white;    
+          font-family: $ff--text;     
+          
+          @include border-radius(0);
+
+          &.wpforms-error {
+            font-size: $fs--x-normal;
+            color: $c--danger;
+          }
+        }
+        input::placeholder,
+        textarea::placeholder {
+          color: $c--white;
+        }
+        input:not(:placeholder-shown),
+        textarea:not(:placeholder-shown) {
+          z-index: 3;
+          position: relative;
+        }
+        textarea {
+          height: 7rem;
+        } 
+      }
+
+      .wpforms-submit-spinner {
+        position: absolute;
+        top: 2rem;
+      }
+
+      .wpforms-submit {
+        color: $c--text;
+        font-size: $fs--medium;
+        font-weight: $fw--bold;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: $c--secondary;
+        padding: 1rem 2rem 0.75rem 2rem;
+        border: none;
+        display: table;
+        margin: 1rem auto 0 auto;
+        width: 12rem;
+        cursor: pointer;
+
+        @include transition-effect(all, 0.3s, ease);
+        @include border-radius(2rem);
+
+        &:hover {
+          @include opacity(0.75);
+        }
+      }
+    }
+    
+    // styles for Contact Form
+    form.wpcf7-form {
+      padding: 0 2rem;
+
+      .wpcf7-response-output{
+        font-family: $ff--text;  
+        font-size: $fs--small;
+        color: $c--white;
+        text-align: center; 
+
+        @include background-opacity($c--link, 0.65);
+        @include border-radius(4px);
+      }
+
+      &.invalid {
+        .wpcf7-response-output{
+          @include background-opacity($c--secondary, 0.65);
+        }
+      }
+      &.aborted,
+      &.failed {
+        .wpcf7-response-output{ 
+          @include background-opacity($c--danger, 0.65);
+        }
+      }
+      &.sent  {
+        .wpcf7-response-output{
+          @include background-opacity($c--success, 0.65);  
+        }
+      }
+
+      p {
+        position: relative;
+        padding: 0;
+        line-height: 1.5rem;
+        
+        .wpcf7-not-valid-tip {
+          font-size: $fs--small;
+        }        
+
+        label {              
+          span:first-child {
+            font-size: $fs--x-normal;
+            color: $c--gray-light;
+            padding: 0.5rem;
+            display: inline-block;
+            position: absolute;
+            top: 1.5rem;
+            z-index: 2;
+
+            strong {
+              color: $c--secondary;
+            }
+  
+            @include transition-effect(all, 0.3s, ease);
+          }
+  
+          &:focus-within {
+            span:first-child {
+              font-size: $fs--small;
+              top: -3px;
+            }
+          }
+
+          input,
+          textarea {
+            border: none;
+            border-bottom: 1px solid $c--gray;
+            width: 100%;
+            font-size: $fs--x-normal;
+            color: $c--gray;
+            padding: 0 0.5rem 0.5rem 0.5rem;
+            outline: none;
+            z-index: 1;
+            background-color: $c--white;    
+            font-family: $ff--text;        
+          }
+          input::placeholder,
+          textarea::placeholder {
+            color: $c--white;
+          }
+          input:not(:placeholder-shown),
+          textarea:not(:placeholder-shown) {
+            z-index: 3;
+            position: relative;
+          }
+          textarea {
+            height: 7rem;
+          }          
+        }
+
+        .wpcf7-spinner {
+          position: absolute;
+          top: 1rem;
+        }
+
+        .wpcf7-submit {
+          color: $c--text;
+          font-size: $fs--medium;
+          font-weight: $fw--bold;
+          text-transform: uppercase;
+          background-color: $c--secondary;
+          padding: 1rem 2rem 0.75rem 2rem;
+          border: none;
+          display: table;
+          margin: 1rem auto 0 auto;
+          width: 11rem;
+          cursor: pointer;
+  
+          @include transition-effect(all, 0.3s, ease);
+          @include border-radius(2rem);
+  
+          &:hover {
+            @include opacity(0.75);
+          }
+        }
+      }     
+    }
+  }
+
+
+  /*
+	-- media queries
+	*/
+	@media screen and (max-width: 768px) {
+    .entry-header {
+      padding: 0.45rem 0;
+    }
+    .list__contact {
+  
+      li {
+        font-size: $fs--x-normal;
+        padding: 1.0rem 0 1.0rem 4.5rem;
+  
+        strong {
+          font-size: $fs--medium;
+        }
+  
+        &::before {
+          top:1.5rem;
+          height: 64px;
+          width: 64px;
+          background-size: 72%;
+        }
+  
+      }    
+    }
+
+    .group__social {
+      padding: 2rem 0;
+  
+      ul {
+        li {
+          padding: 0.75rem;
+  
+          a {
+            width: 22px;
+            height: 22px;
+
+            i {   
+              font-size: $fs--x-medium;         
+            }
+          }  
+        }
+      }    
+    }
+
+		.group__form {
+      padding: 1.5rem 0.5rem;
+
+      form {
+        padding: 0 1rem;
+      }
+    }
+  }
+}

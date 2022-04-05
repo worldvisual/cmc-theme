@@ -1,0 +1,44 @@
+/* --------------------------------------------------
+page - 404
+----------------------------------------------------- */
+
+.error404 {
+	#primary {
+		text-align: center;
+
+		.group-menus-404 {
+			display: flex;
+
+			@include flex-box(flex-start, flex-start);
+
+			div[class^="menu-"] {
+				width: 30%;
+				margin: 1rem 0 0 1rem;
+			}
+
+			.menu-404 {
+				text-align: left;
+				margin-left: 1rem;
+			}	
+		}		
+	}	
+
+	/*
+	-- media queries
+	*/
+	@media screen and (max-width: 768px) {
+		#primary {		
+			.group-menus-404 {
+				display: block;
+
+				div[class^="menu-"] {
+					width: 100%;
+				}
+			}		
+		}	
+	}
+}
+
+
+
+

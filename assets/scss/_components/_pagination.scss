@@ -1,0 +1,32 @@
+/* --------------------------------------------------
+pagination
+----------------------------------------------------- */
+.pagination {
+  margin: 2rem 0;
+
+  @include flex-box(center, flex-end);
+
+  .page-numbers {
+    padding: 5px 10px;			
+    border: 1px solid $c--link;
+    font-family: $ff--text;
+    display: inline-block;
+    font-size: $fs--small;
+    
+    @include border-radius(0.25rem);    
+
+    &.current {
+      background: $c--link;
+      color: $c--white;
+    }
+  }
+
+  a.page-numbers {
+    background: $c--white;
+    display: inline-block;
+
+    &:hover {
+      background-color: $c--secondary;
+    }   
+  }
+}

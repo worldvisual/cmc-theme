@@ -1,0 +1,325 @@
+/* --------------------------------------------------
+menu
+----------------------------------------------------- */
+
+.nav-menu {
+  padding: 0 15px;
+  background-color: $c--white;
+
+  .menu {
+    > .menu-item {
+      display: inline-block;
+      padding: 0px 12px;
+      margin: 0;
+      position: relative;
+      border-left: 1px solid $c--gray-light;
+
+      @include transition-effect(all, 0.3s, ease);
+
+      &:hover {
+        background-color: $c--secondary;
+      }
+
+      &:nth-child(10) {
+        border-right: 1px solid $c--gray-light;
+      }
+
+      > a {
+        display: block;
+        padding: 10px 0 9px;
+        font-size: $fs--normal;
+        color: $c--black;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-family: $ff--text;
+
+        @include transition-effect(all, 0.3s, ease);
+
+        i {
+          width: 14px;
+          height: 14px;
+          display: inline-block;
+        }
+      }
+
+      > .sub-menu {
+        width: 220px;
+        position: absolute;
+        left:0;
+        top:125%;
+        background-color: $c--white;
+        visibility: hidden;
+        z-index: 11;
+
+        @include opacity(0);
+        @include transform(translateY, 10px);
+        @include transition-effect(all, 0.3s, ease);
+        @include box-shadow(0 0 10px rgba(0,0,0,0.2));
+
+        > .menu-item{
+          display: block;
+
+          &:hover {
+            background-color: $c--secondary;
+
+            a {
+              color: $c--black;
+            }
+          }
+
+          > a {
+            display: block;
+            padding: 10px 20px;
+            font-size: $fs--normal;
+            color: $c--black;
+            text-transform: uppercase;
+            font-weight: 400;
+
+            @include transition-effect(all, 0.3s, ease);
+
+            &:hover {
+              color: $c--black;
+            }
+          }
+        }
+      }
+    }
+
+    /* social icon */
+    .nav-social-menu {
+      display: inline-block;
+      padding: 0 10px;
+      width: 15px;
+
+      a {        
+        i {
+          color: $c--secondary;
+          font-size: $fs--normal;
+        }
+      }
+
+      &.ml-md{
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.open-nav-menu {
+  height: 34px;
+  width: 40px;
+  margin-right: 15px;
+  display: none;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    display: block;
+    height: 2px;
+    width: 24px;
+    background-color: $c--secondary;
+    position: relative;
+
+    &:before {
+      top:-7px;
+    }
+
+    &:after {
+      top:7px;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left:0;
+      width: 100%;
+      height: 100%;
+      background-color: $c--secondary;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.close-nav-menu {
+  height: 40px;
+  width: 40px;
+  background-color: $c--white;
+  margin:0 0 15px 15px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 16px;
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  z-index: 9;
+  left:0;
+  top:0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+
+  @include background-opacity($c--black, 0.5);
+  @include opacity(0);
+  @include transition-effect(all, 0.3s, ease);
+}
+
+/*
+-- media queries
+*/
+@media(min-width: 991px) {
+  .nav-menu {
+    .menu {
+      @include flex-box(center, center);
+
+      .menu-item {
+        &.menu-item-has-children {
+          position: relative;
+        }
+
+      }
+
+      .menu-chevron-icon {
+        font-size: $fs--small;
+        margin-left: 6px;
+
+        @include transition-effect(all, 0.3s, ease);
+      }
+
+      > .menu-item-has-children:hover {
+        > .sub-menu {
+          opacity: 1;
+          visibility: visible;
+          overflow: hidden;
+
+          @include transform(translateY, 0);
+          @include opacity(1);
+          @include border-radius(7px);
+        }
+
+        .menu-triangle {
+          height: 9px;
+          width: 22px;
+          background: $c--secondary;
+          clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+          position: absolute;
+          left: 40%;
+          display: block;
+
+          @include transform(rotate, 180deg);
+        }
+
+        .menu-chevron-icon {
+          @include transform(rotate, 180deg);
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 991px) {
+  .nav-menu {
+		position: fixed;
+		left: -280px;
+		visibility: hidden;
+		width: 280px;
+		height: 100%;
+		top:0;
+		overflow-y: auto;
+		background-color: $c--secondary;
+		z-index: 1000;
+		padding: 15px 0;
+
+		@include transition-effect(all, 0.5s, ease);
+
+    .close-nav-menu {
+      display: flex;
+    }
+
+    &.open {
+      visibility: visible;
+      left: 0px;
+    }
+
+    .menu {
+      .ml-md {
+        margin-left: 10px;
+        margin-top: 12px;
+      }
+
+      .nav-social-menu {
+        background-color: $c--primary;
+        height: 40px;
+        width: 40px;
+        border-radius: 25px;
+        text-align: center;
+
+        a{
+          i {
+            line-height: 40px;
+          }
+        }
+      }
+
+      .menu-item {
+        display: block;
+        margin:0;
+        overflow: hidden;
+
+        > a {
+          padding: 12px 15px;
+          border-bottom: 1px dashed $c--gray;
+
+          .plus:before,
+          .plus:after {
+            background-color: $c--white;
+          }
+        }
+
+        &.menu-item-has-children {
+          > a {
+            @include flex-box(center, space-between);
+          }
+
+          &.active {
+            a {
+              .menu-chevron-icon {
+                @include transition-effect(all, 0.3s, ease);
+                @include transform(rotate, 180deg);
+              }
+            }
+          }
+        }
+
+        > .sub-menu {
+          width: 100%;
+          position: relative;
+          opacity: 1;
+          visibility: visible;
+          border:none;
+          background-color: transparent;
+          box-shadow: none;
+          padding: 0;
+          left: 0;
+          top: 0;
+          max-height: 0;
+
+          @include transform(translateY, 0);
+
+          > .menu-item {
+            > a {
+              padding: 12px 45px;
+              border-bottom: 1px dashed $c--gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}

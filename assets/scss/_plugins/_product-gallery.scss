@@ -1,0 +1,71 @@
+/* --------------------------------------------------
+product-gallery styles
+----------------------------------------------------- */
+
+.product-gallery {
+	border:1px solid $c--gray-light;
+	width: 31%;
+	margin: 10px 1%;
+	float: left;
+	text-align: center;
+	border: 1px solid $c--gray-lighter;
+	padding: 10px;
+	background: $c--white;
+
+	@include border-radius(0);
+	@include box-shadow(0 0 8px 4px rgba(0, 0, 0, 0.05));
+	@include transition-effect(all, 0.3s, ease);
+
+	&:hover {
+		@include transform(scale,1.1)
+	}
+
+	&.price,
+	&.price-old {
+		font-size:13px;
+	}
+
+	.gallery-img {
+		display: block;
+		height: 200px;
+		overflow: hidden;
+		
+		img {
+			max-height: 200px;
+			width: 100%;
+		}
+	}
+
+	.gallery-name {
+		margin: 0.5rem 0;
+		display: block;
+
+		a {
+			text-transform:uppercase;
+			font-size: $fs--medium;
+			line-height: $fs--x-medium;
+			font-family: $ff--title;
+			color: $c--primary;
+			font-weight: $fw--bold;	
+		}
+	}
+	.gallery-excerpt {
+		font-size: $fs--medium;  // was $fs--normal;
+	}
+	
+	/*
+	-- media queries
+	*/
+	@media only screen and (max-width:768px) { 
+		width: 48%;
+
+    .gallery-excerpt {
+      font-size: $fs--normal;  // was media;
+    }
+	}
+	@media only screen and (max-width:425px) {
+		width: 100%;
+		margin: 10px 0;
+	}
+}	
+
