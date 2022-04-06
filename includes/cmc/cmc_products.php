@@ -347,40 +347,53 @@ function cmc_related_products($post_type, $taxonomy, $term, $exclude){
 	);
 
 	$query = new WP_Query($args);
-	$result = '<div class="gallery">';
 
-	while ($query->have_posts()) : $query->the_post();
+	?>
+	<div class="gallery">
+		<?php
+		while ($query->have_posts()) : $query->the_post();
 
-		$data = cmc_get_prodcut_data(get_the_ID(), $post_type);
-		$result .= '<div class="product-gallery">
-		<div class="gallery-img"><a href="' . get_the_permalink() . '"><img src="' . $data['image'] . '"></a></div>
-		<span class="gallery-name"><a href="' .  get_the_permalink() . '">' . get_the_title() . '</a></span>
-		<div class="gallery-excerpt">' . $data['type'] . ' - ' . $data['transaction'] . ' - ' . $data['capacitance'] . '</div>';
+			$data = cmc_get_prodcut_data(get_the_ID(), $post_type);
+			?>
+			<div class="product-gallery">
+				<div class="gallery-img">
+					<a href="<?php esc_url(get_the_permalink()); ?>">
+						<img src="<?php esc_url($data['image']); ?>">
+					</a>
+				</div>
+				<span class="gallery-name">
+					<a href="<?php esc_url(get_the_permalink()); ?>">
+						<?php esc_html_e(get_the_title()); ?>
+					</a>
+				</span>
+				<div class="gallery-excerpt">
+					<?php esc_html_e($data['type'] . ' - ' . $data['transaction'] . ' - ' . $data['capacitance']); ?>
+				</div>
+				<?php if (!empty($data['discount']) && $data['discount'] != 0) { ?>
 
-		if (!empty($data['discount']) && $data['discount'] != 0) {
-			$result .= '<span class="price-old">' . $data['price'] . '</span>';
-			$result .= '<span class="price">' . ($data['price'] - $data['discount']) . '€</span>';
-		}
+					<span class="price-old">' . $data['price'] . '</span>
+					<span class="price"><?php esc_html_e($data['price'] - $data['discount']); ?>€</span>
+					
+				<?php } ?>
+			</div>
 
-		$result .= '</div>';
-
-	endwhile;
-	wp_reset_postdata();
-
-	$result .= '</div><div class="clear"></div>';
-
-	return $result;
+			<?php 
+		endwhile;
+		wp_reset_postdata(); 
+		?>
+	</div>
+	<div class="clear"></div>
 }
 
 
 function cmc_get_products_by_id($id, $postType){
 
 	$args = array(
-		'posts_per_page' => -1,
-		'post__in' => $id,
-		'post_type' => $postType,
-		'orderby' => 'date',
-		'order' => 'DESC'
+	'posts_per_page' => -1,
+	'post__in' => $id,
+	'post_type' => $postType,
+	'orderby' => 'date',
+	'order' => 'DESC'
 	);
 
 	$query = new WP_Query($args);
@@ -391,18 +404,18 @@ function cmc_get_products_by_id($id, $postType){
 function cmc_get_products_by_asin($asin, $postType){
 
 	$args = array(
-		'meta_query'  => array(
-			array(
-				'key' => 'cmc-mainproduct-asin',
-				'value' => $asin,
-				'compare' => 'IN'
-			)
+	'meta_query'  => array(
+	array(
+	'key' => 'cmc-mainproduct-asin',
+	'value' => $asin,
+	'compare' => 'IN'
+	)
 
-		),
-		'post_type' => $postType,
-		'posts_per_page' => -1,
-		'orderby' => 'date',
-		'order' => 'DESC'
+	),
+	'post_type' => $postType,
+	'posts_per_page' => -1,
+	'orderby' => 'date',
+	'order' => 'DESC'
 	);
 	$query = new WP_Query($args);
 	return $query;
@@ -416,60 +429,60 @@ function cmc_get_products_by_asin($asin, $postType){
 */
 function cmc_create_cpt_related_product_1(){
 
-  $labels = array(
-    'name' => __('Molinillos'),
-    'singular_name' => __('Molinillo'),
-    'menu_name' => __('Molinillos'),
-    'name_admin_bar' => __('Molinillos'),
-    'archives' => __('Archivo de molinillos'),
-    'parent_item_colon' => __('Molinillo padre:'),
-    'all_items' => __('Todos los elementos'),
-    'add_new' => __('Añadir nuevo'),
-    'add_new_item' => __('Añadir nuevo elemento'),
-    'edit' => __('Editar'),
-    'edit_item' => __('Editar molinillo'),
-    'new_item' => __('Nuevo molinillo'),
-    'view' => __('Ver'),
-    'view_item' => __('Ver molinillo'),
-    'update_item' => __('Actualizar molinillo'),
-    'search_items' => __('Buscar molinillo'),
-    'not_found' => __('No se ha encontrado ningún elemento que coincida'),
-    'not_found_in_trash' => __('No se ha encontrado ningún molinillo que coincida en la papelera'),
-    'featured_image' => __('Imagen destacada'),
-    'set_featured_image' => __('Asignar imagen destacada'),
-    'remove_featured_image' => __('Quitar la imagen destacada'),
-    'use_featured_image' => __('Usar una imagen destacada'),
-    'insert_into_item' => __('Insertar en el molinillo'),
-    'uploaded_to_this_item' => __('Subido a este molinillo'),
-    'items_list' => __('Lista de molinillos'),
-    'items_list_navigation' => __('Navegación lista de molinillos'),
-    'filter_items_list' => __('Filtrar lista de molinillos')
-  );
+	$labels = array(
+	'name' => __('Molinillos'),
+	'singular_name' => __('Molinillo'),
+	'menu_name' => __('Molinillos'),
+	'name_admin_bar' => __('Molinillos'),
+	'archives' => __('Archivo de molinillos'),
+	'parent_item_colon' => __('Molinillo padre:'),
+	'all_items' => __('Todos los elementos'),
+	'add_new' => __('Añadir nuevo'),
+	'add_new_item' => __('Añadir nuevo elemento'),
+	'edit' => __('Editar'),
+	'edit_item' => __('Editar molinillo'),
+	'new_item' => __('Nuevo molinillo'),
+	'view' => __('Ver'),
+	'view_item' => __('Ver molinillo'),
+	'update_item' => __('Actualizar molinillo'),
+	'search_items' => __('Buscar molinillo'),
+	'not_found' => __('No se ha encontrado ningún elemento que coincida'),
+	'not_found_in_trash' => __('No se ha encontrado ningún molinillo que coincida en la papelera'),
+	'featured_image' => __('Imagen destacada'),
+	'set_featured_image' => __('Asignar imagen destacada'),
+	'remove_featured_image' => __('Quitar la imagen destacada'),
+	'use_featured_image' => __('Usar una imagen destacada'),
+	'insert_into_item' => __('Insertar en el molinillo'),
+	'uploaded_to_this_item' => __('Subido a este molinillo'),
+	'items_list' => __('Lista de molinillos'),
+	'items_list_navigation' => __('Navegación lista de molinillos'),
+	'filter_items_list' => __('Filtrar lista de molinillos')
+	);
 
-  $args = array(
-    'label' => __('related_product_1'),
-    'description' => __('Lista de molinillos'),
-    'labels' => $labels,
-    'supports' => array('title', 'editor', 'thumbnail', 'comments'),
-    'taxonomies' => array(),
-    'hierarchical' => false,
-    'public' => true,
-    'show_ui' => true,
-    'show_in_menu' => true,
-    'show_in_nav_menus' => true,
-    'show_in_admin_bar' => true,
-    'menu_position' => 27,
-    'can_export' => true,
-    'has_archive' => false,
-    'exclude_from_search' => false,
-    'capability_type' => 'page',
-    'menu_icon' => get_template_directory_uri() . '/assets/images/icon/icon-dashboard-1.png',
-    'publicly_queryable' => true,
-    'rewrite' => array('slug' => 'molinillos'),
-    'show_in_rest' => true
-  );
+	$args = array(
+	'label' => __('related_product_1'),
+	'description' => __('Lista de molinillos'),
+	'labels' => $labels,
+	'supports' => array('title', 'editor', 'thumbnail', 'comments'),
+	'taxonomies' => array(),
+	'hierarchical' => false,
+	'public' => true,
+	'show_ui' => true,
+	'show_in_menu' => true,
+	'show_in_nav_menus' => true,
+	'show_in_admin_bar' => true,
+	'menu_position' => 27,
+	'can_export' => true,
+	'has_archive' => false,
+	'exclude_from_search' => false,
+	'capability_type' => 'page',
+	'menu_icon' => get_template_directory_uri() . '/assets/images/icon/icon-dashboard-1.png',
+	'publicly_queryable' => true,
+	'rewrite' => array('slug' => 'molinillos'),
+	'show_in_rest' => true
+	);
 
-  register_post_type('related_product_1', $args);
+	register_post_type('related_product_1', $args);
 }
 add_action('init', 'cmc_create_cpt_related_product_1');
 
@@ -480,81 +493,81 @@ add_action('init', 'cmc_create_cpt_related_product_1');
 |--------------------------------------------------------------------------
 */
 function cmc_relatedproduct1_metabox(){
-  add_meta_box('cmc_relatedproduct1_data', 'Información del producto', 'cmc_relatedproduct1_metabox_design', 'related_product_1', 'normal', 'high', null);
+	add_meta_box('cmc_relatedproduct1_data', 'Información del producto', 'cmc_relatedproduct1_metabox_design', 'related_product_1', 'normal', 'high', null);
 }
 add_action('add_meta_boxes', 'cmc_relatedproduct1_metabox');
 
 
 function cmc_relatedproduct1_metabox_design($post){
 
-  wp_nonce_field(basename(__FILE__), 'meta-box-nonce');
-  $cmc_relatedproduct1_options = get_post_meta($post->ID, 'cmc-relatedproduct1-options', true);
-  if (empty($cmc_relatedproduct1_options))
-    $cmc_relatedproduct1_options = array();
-  else
-    $cmc_relatedproduct1_options = unserialize($cmc_relatedproduct1_options);
-  ?>
+	wp_nonce_field(basename(__FILE__), 'meta-box-nonce');
+	$cmc_relatedproduct1_options = get_post_meta($post->ID, 'cmc-relatedproduct1-options', true);
+	if (empty($cmc_relatedproduct1_options))
+	$cmc_relatedproduct1_options = array();
+	else
+	$cmc_relatedproduct1_options = unserialize($cmc_relatedproduct1_options);
+?>
 
-  <div>
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Nombre del producto'); ?></label>
-    <input name="cmc-relatedproduct1-options[product-name]" type="text" value="<?php echo $cmc_relatedproduct1_options['product-name']; ?>">
-    <br />
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Enlace de afiliado'); ?></label>
-    <input name="cmc-relatedproduct1-options[affiliate-link]" type="text" value="<?php echo $cmc_relatedproduct1_options['affiliate-link']; ?>">
-    <br />
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Marca'); ?></label>
-    <input name="cmc-relatedproduct1-options[brand]" type="text" value="<?php echo $cmc_relatedproduct1_options['brand']; ?>">
-    <br />
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Operación'); ?></label>
-    <input name="cmc-relatedproduct1-options[transaction]" type="text" value="<?php echo $cmc_relatedproduct1_options['transaction']; ?>">
-    <br />
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Capacidad'); ?></label>
-    <input name="cmc-relatedproduct1-options[capacitance]" type="text" value="<?php echo $cmc_relatedproduct1_options['capacitance']; ?>">
-    <br />
-    <?php $score = $cmc_relatedproduct1_options['score']; ?>
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Puntuación'); ?></label>
-    <select name="cmc-relatedproduct1-options[score]">
-      <option <?php echo selected($score, '', false); ?> value=""><?php _e('Seleccionar puntuación'); ?></option>
-      <option <?php echo selected($score, '1', false); ?> value="1">1</option>
-      <option <?php echo selected($score, '1.5', false); ?> value="1.5">1.5</option>
-      <option <?php echo selected($score, '2', false); ?> value="2">2</option>
-      <option <?php echo selected($score, '2.5', false); ?> value="2.5">2.5</option>
-      <option <?php echo selected($score, '3', false); ?> value="3">3</option>
-      <option <?php echo selected($score, '3.5', false); ?> value="3.5">3.5</option>
-      <option <?php echo selected($score, '4', false); ?> value="4">4</option>
-      <option <?php echo selected($score, '4.5', false); ?> value="4.5">4.5</option>
-      <option <?php echo selected($score, '5', false); ?> value="5">5</option>
-    </select>
+<div>
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Nombre del producto'); ?></label>
+	<input name="cmc-relatedproduct1-options[product-name]" type="text" value="<?php echo $cmc_relatedproduct1_options['product-name']; ?>">
+	<br />
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Enlace de afiliado'); ?></label>
+	<input name="cmc-relatedproduct1-options[affiliate-link]" type="text" value="<?php echo $cmc_relatedproduct1_options['affiliate-link']; ?>">
+	<br />
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Marca'); ?></label>
+	<input name="cmc-relatedproduct1-options[brand]" type="text" value="<?php echo $cmc_relatedproduct1_options['brand']; ?>">
+	<br />
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Operación'); ?></label>
+	<input name="cmc-relatedproduct1-options[transaction]" type="text" value="<?php echo $cmc_relatedproduct1_options['transaction']; ?>">
+	<br />
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Capacidad'); ?></label>
+	<input name="cmc-relatedproduct1-options[capacitance]" type="text" value="<?php echo $cmc_relatedproduct1_options['capacitance']; ?>">
+	<br />
+	<?php $score = $cmc_relatedproduct1_options['score']; ?>
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Puntuación'); ?></label>
+	<select name="cmc-relatedproduct1-options[score]">
+		<option <?php echo selected($score, '', false); ?> value=""><?php _e('Seleccionar puntuación'); ?></option>
+		<option <?php echo selected($score, '1', false); ?> value="1">1</option>
+		<option <?php echo selected($score, '1.5', false); ?> value="1.5">1.5</option>
+		<option <?php echo selected($score, '2', false); ?> value="2">2</option>
+		<option <?php echo selected($score, '2.5', false); ?> value="2.5">2.5</option>
+		<option <?php echo selected($score, '3', false); ?> value="3">3</option>
+		<option <?php echo selected($score, '3.5', false); ?> value="3.5">3.5</option>
+		<option <?php echo selected($score, '4', false); ?> value="4">4</option>
+		<option <?php echo selected($score, '4.5', false); ?> value="4.5">4.5</option>
+		<option <?php echo selected($score, '5', false); ?> value="5">5</option>
+	</select>
 
-    <br />
+	<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('ASIN'); ?></label>
-    <input name="cmc-relatedproduct1-options[asin]" type="text" value="<?php echo $cmc_relatedproduct1_options['asin']; ?>">
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('ASIN'); ?></label>
+	<input name="cmc-relatedproduct1-options[asin]" type="text" value="<?php echo $cmc_relatedproduct1_options['asin']; ?>">
 
-    <br />
+	<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Texto botón'); ?></label>
-    <input name="cmc-relatedproduct1-options[button-text]" type="text" value="<?php echo $cmc_relatedproduct1_options['button-text']; ?>">
+	<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Texto botón'); ?></label>
+	<input name="cmc-relatedproduct1-options[button-text]" type="text" value="<?php echo $cmc_relatedproduct1_options['button-text']; ?>">
 
-    <br />
+	<br />
 
-  </div>
+</div>
 <?php
 }
 
 
 function cmc_save_relatedproduct1_metabox($post_id, $post, $update){
-  if (!isset($_POST['meta-box-nonce']) || !wp_verify_nonce($_POST['meta-box-nonce'], basename(__FILE__)))
-    return $post_id;
-  if (!current_user_can('edit_post', $post_id))
-    return $post_id;
+	if (!isset($_POST['meta-box-nonce']) || !wp_verify_nonce($_POST['meta-box-nonce'], basename(__FILE__)))
+		return $post_id;
+	if (!current_user_can('edit_post', $post_id))
+		return $post_id;
 
-  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-    return $post_id;
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+		return $post_id;
 
-  if (isset($_POST['cmc-relatedproduct1-options'])) {
-    update_post_meta($post_id, 'cmc-relatedproduct1-options', serialize($_POST['cmc-relatedproduct1-options']));
-  }
+	if (isset($_POST['cmc-relatedproduct1-options'])) {
+		update_post_meta($post_id, 'cmc-relatedproduct1-options', serialize($_POST['cmc-relatedproduct1-options']));
+	}
 }
 add_action('save_post', 'cmc_save_relatedproduct1_metabox', 10, 3);
 
@@ -566,60 +579,60 @@ add_action('save_post', 'cmc_save_relatedproduct1_metabox', 10, 3);
 */
 function cmc_create_cpt_related_product_2(){
 
-  $labels = array(
-    'name' => __('Espumadores de Leche'),
-    'singular_name' => __('Espumador'),
-    'menu_name' => __('Espumadores de leche'),
-    'name_admin_bar' => __('Espumadores de leche'),
-    'archives' => __('Archivo de espumadores'),
-    'parent_item_colon' => __('Espumador padre:'),
-    'all_items' => __('Todos los elementos'),
-    'add_new' => __('Añadir nuevo'),
-    'add_new_item' => __('Añadir nuevo elemento'),
-    'edit' => __('Editar'),
-    'edit_item' => __('Editar espumador'),
-    'new_item' => __('Nuevo espumador'),
-    'view' => __('Ver'),
-    'view_item' => __('Ver espumador'),
-    'update_item' => __('Actualizar espumador'),
-    'search_items' => __('Buscar espumador'),
-    'not_found' => __('No se ha encontrado ningún elemento que coincida'),
-    'not_found_in_trash' => __('No se ha encontrado ningún espumador que coincida en la papelera'),
-    'featured_image' => __('Imagen destacada'),
-    'set_featured_image' => __('Asignar imagen destacada'),
-    'remove_featured_image' => __('Quitar la imagen destacada'),
-    'use_featured_image' => __('Usar una imagen destacada'),
-    'insert_into_item' => __('Insertar en el espumador'),
-    'uploaded_to_this_item' => __('Subido a este espumador'),
-    'items_list' => __('Lista de espumadores'),
-    'items_list_navigation' => __('Navegación lista de espumadores'),
-    'filter_items_list' => __('Filtrar lista de espumadores')
-  );
+	$labels = array(
+		'name' => __('Espumadores de Leche'),
+		'singular_name' => __('Espumador'),
+		'menu_name' => __('Espumadores de leche'),
+		'name_admin_bar' => __('Espumadores de leche'),
+		'archives' => __('Archivo de espumadores'),
+		'parent_item_colon' => __('Espumador padre:'),
+		'all_items' => __('Todos los elementos'),
+		'add_new' => __('Añadir nuevo'),
+		'add_new_item' => __('Añadir nuevo elemento'),
+		'edit' => __('Editar'),
+		'edit_item' => __('Editar espumador'),
+		'new_item' => __('Nuevo espumador'),
+		'view' => __('Ver'),
+		'view_item' => __('Ver espumador'),
+		'update_item' => __('Actualizar espumador'),
+		'search_items' => __('Buscar espumador'),
+		'not_found' => __('No se ha encontrado ningún elemento que coincida'),
+		'not_found_in_trash' => __('No se ha encontrado ningún espumador que coincida en la papelera'),
+		'featured_image' => __('Imagen destacada'),
+		'set_featured_image' => __('Asignar imagen destacada'),
+		'remove_featured_image' => __('Quitar la imagen destacada'),
+		'use_featured_image' => __('Usar una imagen destacada'),
+		'insert_into_item' => __('Insertar en el espumador'),
+		'uploaded_to_this_item' => __('Subido a este espumador'),
+		'items_list' => __('Lista de espumadores'),
+		'items_list_navigation' => __('Navegación lista de espumadores'),
+		'filter_items_list' => __('Filtrar lista de espumadores')
+	);
 
-  $args = array(
-    'label' => __('related_product_2'),
-    'description' => __('Lista de espumadores'),
-    'labels' => $labels,
-    'supports' => array('title', 'editor', 'thumbnail', 'comments'),
-    'taxonomies' => array(),
-    'hierarchical' => false,
-    'public' => true,
-    'show_ui' => true,
-    'show_in_menu' => true,
-    'show_in_nav_menus' => true,
-    'show_in_admin_bar' => true,
-    'menu_position' => 28,
-    'can_export' => true,
-    'has_archive' => false,
-    'exclude_from_search' => false,
-    'capability_type' => 'page',
-    'menu_icon' => get_template_directory_uri() . '/assets/images/icon/icon-dashboard-1.png',
-    'publicly_queryable' => true,
-    'rewrite' => array('slug' => 'espumadores-de-leche'),
-    'show_in_rest' => true
-  );
+	$args = array(
+		'label' => __('related_product_2'),
+		'description' => __('Lista de espumadores'),
+		'labels' => $labels,
+		'supports' => array('title', 'editor', 'thumbnail', 'comments'),
+		'taxonomies' => array(),
+		'hierarchical' => false,
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_in_admin_bar' => true,
+		'menu_position' => 28,
+		'can_export' => true,
+		'has_archive' => false,
+		'exclude_from_search' => false,
+		'capability_type' => 'page',
+		'menu_icon' => get_template_directory_uri() . '/assets/images/icon/icon-dashboard-1.png',
+		'publicly_queryable' => true,
+		'rewrite' => array('slug' => 'espumadores-de-leche'),
+		'show_in_rest' => true
+	);
 
-  register_post_type('related_product_2', $args);
+	register_post_type('related_product_2', $args);
 }
 add_action('init', 'cmc_create_cpt_related_product_2');
 
@@ -630,93 +643,93 @@ add_action('init', 'cmc_create_cpt_related_product_2');
 |--------------------------------------------------------------------------
 */
 function cmc_relatedproduct2_metabox(){
-  add_meta_box('cmc_relatedproduct2_data', 'Información del producto', 'cmc_relatedproduct2_metabox_design', 'related_product_2', 'normal', 'high', null);
+	add_meta_box('cmc_relatedproduct2_data', 'Información del producto', 'cmc_relatedproduct2_metabox_design', 'related_product_2', 'normal', 'high', null);
 }
 add_action('add_meta_boxes', 'cmc_relatedproduct2_metabox');
 
 function cmc_relatedproduct2_metabox_design($post){
-  wp_nonce_field(basename(__FILE__), 'meta-box-nonce');
+	wp_nonce_field(basename(__FILE__), 'meta-box-nonce');
 
-  $cmc_relatedproduct2_options = get_post_meta($post->ID, 'cmc-relatedproduct2-options', true);
+	$cmc_relatedproduct2_options = get_post_meta($post->ID, 'cmc-relatedproduct2-options', true);
 
-  if (empty($cmc_relatedproduct2_options))
-    $cmc_relatedproduct2_options = array();
-  else
-    $cmc_relatedproduct2_options = unserialize($cmc_relatedproduct2_options);
-  ?>
+	if (empty($cmc_relatedproduct2_options))
+		$cmc_relatedproduct2_options = array();
+	else
+		$cmc_relatedproduct2_options = unserialize($cmc_relatedproduct2_options);
+	?>
 
-  <div>
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Nombre del producto'); ?></label>
-    <input name="cmc-relatedproduct2-options[product-name]" type="text" value="<?php echo $cmc_relatedproduct2_options['product-name']; ?>">
+	<div>
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Nombre del producto'); ?></label>
+		<input name="cmc-relatedproduct2-options[product-name]" type="text" value="<?php echo $cmc_relatedproduct2_options['product-name']; ?>">
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Enlace de afiliado'); ?></label>
-    <input name="cmc-relatedproduct2-options[affiliate-link]" type="text" value="<?php echo $cmc_relatedproduct2_options['affiliate-link']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Enlace de afiliado'); ?></label>
+		<input name="cmc-relatedproduct2-options[affiliate-link]" type="text" value="<?php echo $cmc_relatedproduct2_options['affiliate-link']; ?>">
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Marca'); ?></label>
-    <input name="cmc-relatedproduct2-options[brand]" type="text" value="<?php echo $cmc_relatedproduct2_options['brand']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Marca'); ?></label>
+		<input name="cmc-relatedproduct2-options[brand]" type="text" value="<?php echo $cmc_relatedproduct2_options['brand']; ?>">
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Operación'); ?></label>
-    <input name="cmc-relatedproduct2-options[transaction]" type="text" value="<?php echo $cmc_relatedproduct2_options['transaction']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Operación'); ?></label>
+		<input name="cmc-relatedproduct2-options[transaction]" type="text" value="<?php echo $cmc_relatedproduct2_options['transaction']; ?>">
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Capacidad'); ?></label>
-    <input name="cmc-relatedproduct2-options[capacitance]" type="text" value="<?php echo $cmc_relatedproduct2_options['capacitance']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Capacidad'); ?></label>
+		<input name="cmc-relatedproduct2-options[capacitance]" type="text" value="<?php echo $cmc_relatedproduct2_options['capacitance']; ?>">
 
-    <br />
+		<br />
 
-    <?php $score = $cmc_relatedproduct2_options['score']; ?>
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Puntuación'); ?></label>
-    <select name="cmc-relatedproduct2-options[score]">
-      <option <?php echo selected($score, '', false); ?> value=""><?php _e('Seleccionar puntuación'); ?></option>
-      <option <?php echo selected($score, '1', false); ?> value="1">1</option>
-      <option <?php echo selected($score, '1.5', false); ?> value="1.5">1.5</option>
-      <option <?php echo selected($score, '2', false); ?> value="2">2</option>
-      <option <?php echo selected($score, '2.5', false); ?> value="2.5">2.5</option>
-      <option <?php echo selected($score, '3', false); ?> value="3">3</option>
-      <option <?php echo selected($score, '3.5', false); ?> value="3.5">3.5</option>
-      <option <?php echo selected($score, '4', false); ?> value="4">4</option>
-      <option <?php echo selected($score, '4.5', false); ?> value="4.5">4.5</option>
-      <option <?php echo selected($score, '5', false); ?> value="5">5</option>
-    </select>
+		<?php $score = $cmc_relatedproduct2_options['score']; ?>
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Puntuación'); ?></label>
+		<select name="cmc-relatedproduct2-options[score]">
+			<option <?php echo selected($score, '', false); ?> value=""><?php _e('Seleccionar puntuación'); ?></option>
+			<option <?php echo selected($score, '1', false); ?> value="1">1</option>
+			<option <?php echo selected($score, '1.5', false); ?> value="1.5">1.5</option>
+			<option <?php echo selected($score, '2', false); ?> value="2">2</option>
+			<option <?php echo selected($score, '2.5', false); ?> value="2.5">2.5</option>
+			<option <?php echo selected($score, '3', false); ?> value="3">3</option>
+			<option <?php echo selected($score, '3.5', false); ?> value="3.5">3.5</option>
+			<option <?php echo selected($score, '4', false); ?> value="4">4</option>
+			<option <?php echo selected($score, '4.5', false); ?> value="4.5">4.5</option>
+			<option <?php echo selected($score, '5', false); ?> value="5">5</option>
+		</select>
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('ASIN'); ?></label>
-    <input name="cmc-relatedproduct2-options[asin]" type="text" value="<?php echo $cmc_relatedproduct2_options['asin']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('ASIN'); ?></label>
+		<input name="cmc-relatedproduct2-options[asin]" type="text" value="<?php echo $cmc_relatedproduct2_options['asin']; ?>">
 
-    <br />
+		<br />
 
-    <label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Texto botón'); ?></label>
-    <input name="cmc-relatedproduct2-options[button-text]" type="text" value="<?php echo $cmc_relatedproduct2_options['button-text']; ?>">
+		<label style="width:100px;display:inline-block;" for="input-metabox"><?php _e('Texto botón'); ?></label>
+		<input name="cmc-relatedproduct2-options[button-text]" type="text" value="<?php echo $cmc_relatedproduct2_options['button-text']; ?>">
 
-    <br />
+		<br />
 
-  </div>
-<?php
+	</div>
+	<?php
 }
 
 
 function cmc_save_relatedproduct2_metabox($post_id, $post, $update){
 
-  if (!isset($_POST['meta-box-nonce']) || !wp_verify_nonce($_POST['meta-box-nonce'], basename(__FILE__)))
-    return $post_id;
+	if (!isset($_POST['meta-box-nonce']) || !wp_verify_nonce($_POST['meta-box-nonce'], basename(__FILE__)))
+		return $post_id;
 
-  if (!current_user_can('edit_post', $post_id))
-    return $post_id;
+	if (!current_user_can('edit_post', $post_id))
+		return $post_id;
 
-  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-    return $post_id;
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+		return $post_id;
 
-  if (isset($_POST['cmc-relatedproduct2-options'])) {
-    update_post_meta($post_id, 'cmc-relatedproduct2-options', serialize($_POST['cmc-relatedproduct2-options']));
-  }
+	if (isset($_POST['cmc-relatedproduct2-options'])) {
+		update_post_meta($post_id, 'cmc-relatedproduct2-options', serialize($_POST['cmc-relatedproduct2-options']));
+	}
 }
 add_action('save_post', 'cmc_save_relatedproduct2_metabox', 10, 3);
 
@@ -728,13 +741,13 @@ add_action('save_post', 'cmc_save_relatedproduct2_metabox', 10, 3);
 */
 function get_rich_snippets(){
 
-  if (get_post_type() == 'main_product' || get_post_type() == 'related_product_1' || get_post_type() == 'related_product_2') {
-    $data = cmc_get_prodcut_data(get_the_ID(), get_post_type());
-    $score = $data['score'];
-    $product = get_the_title();
-    $ratingoutput = '<script type="application/ld+json">{"@context": "http://schema.org","@type": "Product","name": "' . $product . '","aggregateRating": {"@type": "AggregateRating","ratingValue": "' . $score . '"}}</script>';
+	if (get_post_type() == 'main_product' || get_post_type() == 'related_product_1' || get_post_type() == 'related_product_2') {
+		$data = cmc_get_prodcut_data(get_the_ID(), get_post_type());
+		$score = $data['score'];
+		$product = get_the_title();
+		$ratingoutput = '<script type="application/ld+json">{"@context": "http://schema.org","@type": "Product","name": "' . $product . '","aggregateRating": {"@type": "AggregateRating","ratingValue": "' . $score . '"}}</script>';
 
-    return $ratingoutput;
-  } else
-    return '';
+		return $ratingoutput;
+	} else
+	return '';
 }
