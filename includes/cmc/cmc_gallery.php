@@ -34,11 +34,11 @@ function cmc_gallery_data_metabox_save($post_id, $post, $update){
     return $post_id;
 
   if (isset($_POST['cmc-gallery-url'])) {
-    update_post_meta($post_id, 'cmc-gallery-url', $_POST['cmc-gallery-url']);
+    update_post_meta($post_id, 'cmc-gallery-url', wp_unslash($_POST['cmc-gallery-url']));
   }
 
   if (isset($_POST['cmc-gallery-price'])) {
-    update_post_meta($post_id, 'cmc-gallery-price', $_POST['cmc-gallery-price']);
+    update_post_meta($post_id, 'cmc-gallery-price', wp_unslash($_POST['cmc-gallery-price']));
   }
 }
 add_action('save_post', 'cmc_gallery_data_metabox_save', 10, 3);
