@@ -11,8 +11,8 @@
 			?>
 			<h2><a class="post-title-2" href="<?php esc_url(the_permalink()); ?>"><?php the_title(); ?></a></h2>
 		</header>
-		<div class="entry-content-2"><?php echo substr(wp_strip_all_tags(get_the_excerpt()), 0, 135); ?>...</div>
-		<div class="read-more"><a href="<?php esc_url(the_permalink()); ?>"><?php _e('Leer más >>'); ?></a></div>
+		<div class="entry-content-2"><?php _e(substr(wp_strip_all_tags(get_the_excerpt()), 0, 135)); ?>...</div>
+		<div class="read-more"><a href="<?php esc_url(the_permalink()); ?>"><?php esc_html_e('Leer más >>'); ?></a></div>
 	</article>
 <?php endwhile; ?>
 <div class="clear"></div>
