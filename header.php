@@ -85,14 +85,14 @@
 								<span></span>
 							</div>
 							<div class="brand-logo-thumbnail">
-								<a href="<?= home_url('/'); ?>">
+								<a href="<?= esc_url(home_url('/')); ?>">
 									<img alt="<?php esc_html_e('Logo de '); bloginfo('name'); ?>" src="<?= esc_url($options['theme_logo']['value']); ?>">
 								</a>
 							</div>
 						</div>
 						<div class="header-top-search-box">
 							<div class="search-box-group">
-								<form id="searchform" role="search" method="get" action="<?= home_url('/'); ?>">
+								<form id="searchform" role="search" method="get" action="<?= esc_url(home_url('/')); ?>">
 									<input type="search" id="s" name="s" class="search-box" placeholder="<?php _e('Busca aquí...'); ?>">
 									<button class="search-btn"><i class="fa fa-search"></i></button>
 								</form>
