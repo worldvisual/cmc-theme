@@ -6,7 +6,7 @@
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 	<?php $options = get_option('cmc_options'); ?>
 	<title><?php wp_title(''); ?></title>
-	<link rel="shortcut icon" href="<?php esc_url($options['theme_favicon']['value']); ?>">
+	<link rel="shortcut icon" href="<?= esc_url($options['theme_favicon']['value']); ?>">
 	<?php if(is_search()): ?><meta name="robots" content="noindex"><?php endif; ?>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -16,16 +16,16 @@
 	})(window,document,'script','dataLayer','GTM-TK5RDBV');</script>
 	<!-- End Google Tag Manager -->
 	<!-- CrazyEgg Settings -->
-	<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0034/9897.js" async="async"></script>
+	<script type="text/javascript" src="https//script.crazyegg.com/pages/scripts/0034/9897.js" async="async"></script>
 	<!-- CrazyEgg Settings -->
 	<!-- Soporte para móviles -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="<?php bloginfo('name'); ?>">
-	<link rel="apple-touch-icon" href="<?php esc_url(_e(get_template_directory_uri()."/images/apple-touch-icon.jpg")); ?>">
+	<link rel="apple-touch-icon" href="<?= esc_url(get_template_directory_uri()."/images/apple-touch-icon.jpg"); ?>">
 	<meta name="theme-color" content="#000033">
 	<meta name="google-site-verification" content="S0HYGuIEvoYNVTHi5YdbSZKFcN8vxwOeonOlRahmaKo" />
 	<meta name="application-name" content="<?php bloginfo('name'); ?>">
-	<link rel="icon" type="image/png" href="<?php esc_url(_e(get_template_directory_uri()."/images/apple-touch-icon.jpg")); ?>" sizes="192x192">
+	<link rel="icon" type="image/png" href="<?= esc_url(get_template_directory_uri()."/images/apple-touch-icon.jpg"); ?>" sizes="192x192">
 	<!-- End -->
 		<!--- Atomik Lib settings --->
 	<link rel="preconnect" href="https://partners.mcontigo.com">
@@ -85,14 +85,14 @@
 								<span></span>
 							</div>
 							<div class="brand-logo-thumbnail">
-								<a href="<?php esc_url(home_url('/')); ?>">
-									<img alt="<?php _e('Logo de '); bloginfo('name'); ?>" src="<?php esc_url(_e($options['theme_logo']['value'])); ?>">
+								<a href="<?= home_url('/'); ?>">
+									<img alt="<?php esc_html_e('Logo de '); bloginfo('name'); ?>" src="<?= esc_url($options['theme_logo']['value']); ?>">
 								</a>
 							</div>
 						</div>
 						<div class="header-top-search-box">
 							<div class="search-box-group">
-								<form id="searchform" role="search" method="get" action="<?php esc_url(home_url('/')); ?>">
+								<form id="searchform" role="search" method="get" action="<?= home_url('/'); ?>">
 									<input type="search" id="s" name="s" class="search-box" placeholder="<?php _e('Busca aquí...'); ?>">
 									<button class="search-btn"><i class="fa fa-search"></i></button>
 								</form>
