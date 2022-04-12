@@ -6,7 +6,7 @@
       <img class="product-menu-img" src="<?php esc_html_e($data['image-small']); ?>">
       <div class="product-menu-data">
         <h2><?php the_title(); ?></h2>
-        <span class="product-stars"><?php _e($data['score-stars-small']); ?></span>
+        <span class="product-stars"><?= $data['score-stars-small']; ?></span>
         <div class="product-menu-features">
           <?php if (get_post_type() == 'main_product') : ?>
             <span>
