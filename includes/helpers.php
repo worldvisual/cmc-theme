@@ -221,11 +221,11 @@ function get_amazon_lowest_price_product($kw){
 */
 function wp_filter_input(string $filter_type, string $filter_value){
 
-  $filter_type === 'cookie' ? $filter_type = INPUT_COOKIE : $output = null;
-  $filter_type === 'server' ? $filter_type = INPUT_SERVER : $output = null;
-  $filter_type === 'post' ? $filter_type = INPUT_POST : $output = null;
-  $filter_type === 'get' ? $filter_type = INPUT_GET : $output = null;
-  $filter_type === 'env' ? $filter_type = INPUT_ENV : $output = null;
+  $filter_type === 'cookie' ? $filter_type = INPUT_COOKIE : null;
+  $filter_type === 'server' ? $filter_type = INPUT_SERVER : null;
+  $filter_type === 'post' ? $filter_type = INPUT_POST : null;
+  $filter_type === 'get' ? $filter_type = INPUT_GET : null;
+  $filter_type === 'env' ? $filter_type = INPUT_ENV : null;
 
   $output = filter_input($filter_type, $filter_value, FILTER_SANITIZE_STRING);
 
